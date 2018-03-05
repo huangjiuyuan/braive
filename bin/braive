@@ -1,0 +1,13 @@
+#!/bin/bash
+logit () {
+    >&2 echo \$1
+}
+
+logit "CNI method: \$CNI_COMMAND"
+logit "CNI container id: \$CNI_CONTAINERID"
+logit "-------------- Begin config"
+while read line
+do
+  logit "\$line"
+done < /dev/stdin
+logit "-------------- End config"
