@@ -1,0 +1,1 @@
+echo '{ "cname": "braive", "ipam": { "type": "host-local", "ranges": [ [{"subnet": "10.22.0.0/16", "rangeStart": "10.22.0.2","rangeEnd": "10.22.255.255", "gateway": "10.22.0.1"}] ], "dataDir": "/tmp/braive"  } }' | CNI_COMMAND=ADD CNI_CONTAINERID=containerid CNI_NETNS=/dev/null CNI_IFNAME=braive CNI_PATH=/opt/cni/bin/ /opt/cni/bin/host-local
