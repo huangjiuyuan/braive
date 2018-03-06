@@ -1,0 +1,96 @@
+{
+	"ImportPath": "github.com/huangjiuyuan/braive",
+	"GoVersion": "go1.9",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/containernetworking/cni/pkg/invoke",
+			"Comment": "v0.6.0-70-g9aab8b3",
+			"Rev": "9aab8b3e9f7ad4c11375e48ddd486551b5e79cbb"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/cni/pkg/skel",
+			"Comment": "v0.6.0-70-g9aab8b3",
+			"Rev": "9aab8b3e9f7ad4c11375e48ddd486551b5e79cbb"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/cni/pkg/types",
+			"Comment": "v0.6.0-70-g9aab8b3",
+			"Rev": "9aab8b3e9f7ad4c11375e48ddd486551b5e79cbb"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/cni/pkg/types/020",
+			"Comment": "v0.6.0-70-g9aab8b3",
+			"Rev": "9aab8b3e9f7ad4c11375e48ddd486551b5e79cbb"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/cni/pkg/types/current",
+			"Comment": "v0.6.0-70-g9aab8b3",
+			"Rev": "9aab8b3e9f7ad4c11375e48ddd486551b5e79cbb"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/cni/pkg/version",
+			"Comment": "v0.6.0-70-g9aab8b3",
+			"Rev": "9aab8b3e9f7ad4c11375e48ddd486551b5e79cbb"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/plugins/pkg/ip",
+			"Comment": "v0.7.0-10-g372bb5e",
+			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/plugins/pkg/ipam",
+			"Comment": "v0.7.0-10-g372bb5e",
+			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/plugins/pkg/ns",
+			"Comment": "v0.7.0-10-g372bb5e",
+			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/plugins/pkg/utils",
+			"Comment": "v0.7.0-10-g372bb5e",
+			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/plugins/pkg/utils/hwaddr",
+			"Comment": "v0.7.0-10-g372bb5e",
+			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
+		},
+		{
+			"ImportPath": "github.com/containernetworking/plugins/pkg/utils/sysctl",
+			"Comment": "v0.7.0-10-g372bb5e",
+			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
+		},
+		{
+			"ImportPath": "github.com/coreos/go-iptables/iptables",
+			"Comment": "v0.3.0",
+			"Rev": "b5b1876b170881a8259f036445ee89c8669db386"
+		},
+		{
+			"ImportPath": "github.com/j-keck/arping",
+			"Rev": "2cf9dc699c5640a7e2c81403a44127bf28033600"
+		},
+		{
+			"ImportPath": "github.com/safchain/ethtool",
+			"Rev": "7ff1ba29eca231991280817541cb3903f6be15d1"
+		},
+		{
+			"ImportPath": "github.com/vishvananda/netlink",
+			"Rev": "f67b75edbf5e3bb7dfe70bb788610693a71be3d1"
+		},
+		{
+			"ImportPath": "github.com/vishvananda/netlink/nl",
+			"Rev": "f67b75edbf5e3bb7dfe70bb788610693a71be3d1"
+		},
+		{
+			"ImportPath": "github.com/vishvananda/netns",
+			"Rev": "be1fbeda19366dea804f00efff2dd73a1642fdcc"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "95c6576299259db960f6c5b9b69ea52422860fce"
+		}
+	]
+}
