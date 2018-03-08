@@ -1,4 +1,4 @@
-export CNI_PATH=$GOPATH/src/github.com/huangjiuyuan/braive/bin
-export NETCONFPATH=$GOPATH/src/github.com/huangjiuyuan/braive/conf
+export CNI_PATH=/opt/cni/bin/
+export NETCONFPATH=/etc/cni/net.d
 
 ./docker-run.sh --rm busybox ifconfig

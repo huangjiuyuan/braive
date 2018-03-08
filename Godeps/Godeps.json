@@ -1,7 +1,7 @@
 {
 	"ImportPath": "github.com/huangjiuyuan/braive",
-	"GoVersion": "go1.10",
-	"GodepVersion": "v80",
+	"GoVersion": "go1.9",
+	"GodepVersion": "v79",
 	"Packages": [
 		"./..."
 	],
