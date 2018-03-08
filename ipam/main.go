@@ -19,13 +19,12 @@ import (
 	"net"
 	"strings"
 
-	"github.com/containernetworking/plugins/plugins/ipam/host-local/backend/allocator"
-	"github.com/containernetworking/plugins/plugins/ipam/host-local/backend/disk"
-
 	"github.com/containernetworking/cni/pkg/skel"
 	"github.com/containernetworking/cni/pkg/types"
 	"github.com/containernetworking/cni/pkg/types/current"
 	"github.com/containernetworking/cni/pkg/version"
+	"github.com/containernetworking/plugins/plugins/ipam/host-local/backend/allocator"
+	"github.com/containernetworking/plugins/plugins/ipam/host-local/backend/disk"
 )
 
 func main() {
@@ -60,7 +59,7 @@ func cmdAdd(args *skel.CmdArgs) error {
 
 	// Store all requested IPs in a map, so we can easily remove ones we use
 	// and error if some remain
-	requestedIPs := map[string]net.IP{} //net.IP cannot be a key
+	requestedIPs := map[string]net.IP{} // net.IP cannot be a key
 
 	for _, ip := range ipamConf.IPArgs {
 		requestedIPs[ip.String()] = ip
