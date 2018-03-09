@@ -23,8 +23,8 @@ import (
 	"github.com/containernetworking/cni/pkg/types"
 	"github.com/containernetworking/cni/pkg/types/current"
 	"github.com/containernetworking/cni/pkg/version"
-	"github.com/containernetworking/plugins/plugins/ipam/host-local/backend/allocator"
-	"github.com/containernetworking/plugins/plugins/ipam/host-local/backend/disk"
+	"github.com/huangjiuyuan/braive/ipam/backend/allocator"
+	"github.com/huangjiuyuan/braive/ipam/backend/etcdv3"
 )
 
 func main() {
@@ -47,11 +47,10 @@ func cmdAdd(args *skel.CmdArgs) error {
 		result.DNS = *dns
 	}
 
-	store, err := disk.New(ipamConf.Name, ipamConf.DataDir)
+	store, err := etcdv3.New(ipamConf.Name, nil)
 	if err != nil {
 		return err
 	}
-	defer store.Close()
 
 	// Keep the allocators we used, so we can release all IPs if an error
 	// occurs after we start allocating
@@ -115,11 +114,10 @@ func cmdDel(args *skel.CmdArgs) error {
 		return err
 	}
 
-	store, err := disk.New(ipamConf.Name, ipamConf.DataDir)
+	store, err := etcdv3.New(ipamConf.Name, nil)
 	if err != nil {
 		return err
 	}
-	defer store.Close()
 
 	// Loop through all ranges, releasing all IPs, even if an error occurs
 	var errors []string

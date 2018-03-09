@@ -80,7 +80,10 @@ func (s *Store) LastReservedIP(rangeID string) (net.IP, error) {
 		return nil, err
 	}
 
-	return gr.Kvs[0].Value, nil
+	if len(gr.Kvs) != 0 {
+		return gr.Kvs[0].Value, nil
+	}
+	return nil, nil
 }
 
 func (s *Store) Release(ip net.IP) error {
