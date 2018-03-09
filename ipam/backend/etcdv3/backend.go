@@ -126,3 +126,12 @@ func (s *Store) ReleaseByID(id string) error {
 
 	return nil
 }
+
+func (s *Store) Close() error {
+	err := s.EtcdClient.Close()
+	if err != nil {
+		return err
+	}
+
+	return nil
+}

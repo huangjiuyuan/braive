@@ -7,4 +7,5 @@ type Store interface {
 	LastReservedIP(rangeID string) (net.IP, error)
 	Release(ip net.IP) error
 	ReleaseByID(id string) error
+	Close() error
 }

@@ -28,9 +28,6 @@ func NewIPAllocator(s *RangeSet, store backend.Store, id int) *IPAllocator {
 
 // Get alocates an IP
 func (a *IPAllocator) Get(id string, requestedIP net.IP) (*current.IPConfig, error) {
-	// a.store.Lock()
-	// defer a.store.Unlock()
-
 	var reservedIP *net.IPNet
 	var gw net.IP
 
@@ -97,9 +94,6 @@ func (a *IPAllocator) Get(id string, requestedIP net.IP) (*current.IPConfig, err
 
 // Release clears all IPs allocated for the container with given ID
 func (a *IPAllocator) Release(id string) error {
-	// a.store.Lock()
-	// defer a.store.Unlock()
-
 	return a.store.ReleaseByID(id)
 }
 

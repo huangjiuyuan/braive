@@ -51,6 +51,7 @@ func cmdAdd(args *skel.CmdArgs) error {
 	if err != nil {
 		return err
 	}
+	defer store.Close()
 
 	// Keep the allocators we used, so we can release all IPs if an error
 	// occurs after we start allocating
@@ -87,7 +88,6 @@ func cmdAdd(args *skel.CmdArgs) error {
 		}
 
 		allocs = append(allocs, allocator)
-
 		result.IPs = append(result.IPs, ipConf)
 	}
 
@@ -102,7 +102,6 @@ func cmdAdd(args *skel.CmdArgs) error {
 		}
 		return fmt.Errorf(errstr)
 	}
-
 	result.Routes = ipamConf.Routes
 
 	return types.PrintResult(result, confVersion)
@@ -118,6 +117,7 @@ func cmdDel(args *skel.CmdArgs) error {
 	if err != nil {
 		return err
 	}
+	defer store.Close()
 
 	// Loop through all ranges, releasing all IPs, even if an error occurs
 	var errors []string
@@ -133,5 +133,6 @@ func cmdDel(args *skel.CmdArgs) error {
 	if errors != nil {
 		return fmt.Errorf(strings.Join(errors, ";"))
 	}
+
 	return nil
 }
