@@ -8,13 +8,15 @@ import (
 
 func TestReserve(t *testing.T) {
 	tests := []struct {
-		id       string
 		ip       string
+		id       string
+		rangeID  string
 		expected bool
 	}{
 		{
-			"100",
 			"192.168.0.100",
+			"100",
+			"0",
 			true,
 		},
 	}
@@ -25,7 +27,7 @@ func TestReserve(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		ok, err := s.Reserve(test.id, net.ParseIP(test.ip), "0")
+		ok, err := s.Reserve(test.id, net.ParseIP(test.ip), test.rangeID)
 		if err != nil {
 			t.Errorf("error happened when reserving: %s", err)
 		}
@@ -33,15 +35,20 @@ func TestReserve(t *testing.T) {
 		if !reflect.DeepEqual(test.expected, ok) {
 			t.Errorf("expected %#v, got %#v", test.expected, ok)
 		}
+
+		s.EtcdClient.Delete(s.Ctx, test.ip)
+		s.EtcdClient.Delete(s.Ctx, lastIPPrefix+test.rangeID)
 	}
 }
 
 func TestLastReservedIP(t *testing.T) {
 	tests := []struct {
-		rangeIP  string
+		ip       string
+		rangeID  string
 		expected string
 	}{
 		{
+			"192.168.0.100",
 			"0",
 			"192.168.0.100",
 		},
@@ -53,7 +60,9 @@ func TestLastReservedIP(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		ip, err := s.LastReservedIP(test.rangeIP)
+		s.EtcdClient.KV.Put(s.Ctx, lastIPPrefix+test.rangeID, test.ip)
+
+		ip, err := s.LastReservedIP(test.rangeID)
 		if err != nil {
 			t.Errorf("error happened when reserving: %s", err)
 		}
@@ -61,9 +70,77 @@ func TestLastReservedIP(t *testing.T) {
 		if !reflect.DeepEqual(test.expected, string(ip)) {
 			t.Errorf("expected %s, got %s", test.expected, string(ip))
 		}
+
+		s.EtcdClient.Delete(s.Ctx, lastIPPrefix+test.rangeID)
 	}
 }
 
-func TestRelease(t *testing.T) {}
+func TestRelease(t *testing.T) {
+	tests := []struct {
+		ip string
+		id string
+	}{
+		{
+			"192.168.0.100",
+			"100",
+		},
+	}
 
-func TestReleaseByID(t *testing.T) {}
+	s, err := New("cni", nil)
+	if err != nil {
+		t.Errorf("error happened when initializing etcd store: %s", err)
+	}
+
+	for _, test := range tests {
+		s.EtcdClient.KV.Put(s.Ctx, test.ip, test.id)
+
+		err := s.Release(net.ParseIP(test.ip))
+		if err != nil {
+			t.Errorf("error happened when reserving: %s", err)
+		}
+
+		gr, err := s.EtcdClient.KV.Get(s.Ctx, test.ip)
+		if err != nil {
+			t.Errorf("Failed to get IP: %s", err)
+		}
+
+		if len(gr.Kvs) != 0 {
+			t.Errorf("expected 0, got %d", len(gr.Kvs))
+		}
+	}
+}
+
+func TestReleaseByID(t *testing.T) {
+	tests := []struct {
+		ip string
+		id string
+	}{
+		{
+			"192.168.0.100",
+			"100",
+		},
+	}
+
+	s, err := New("cni", nil)
+	if err != nil {
+		t.Errorf("error happened when initializing etcd store: %s", err)
+	}
+
+	for _, test := range tests {
+		s.EtcdClient.KV.Put(s.Ctx, test.ip, test.id)
+
+		err := s.ReleaseByID(test.id)
+		if err != nil {
+			t.Errorf("error happened when reserving: %s", err)
+		}
+
+		gr, err := s.EtcdClient.KV.Get(s.Ctx, test.ip)
+		if err != nil {
+			t.Errorf("Failed to get IP: %s", err)
+		}
+
+		if len(gr.Kvs) != 0 {
+			t.Errorf("expected 0, got %d", len(gr.Kvs))
+		}
+	}
+}

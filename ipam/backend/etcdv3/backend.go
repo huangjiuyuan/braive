@@ -59,7 +59,7 @@ func (s *Store) Reserve(id string, ip net.IP, rangeID string) (bool, error) {
 		glog.Errorf("Failed to reserve IP %s", ip.String())
 		return false, err
 	}
-	glog.Info("Succeed to reserve IP %s with ID %d", ip.String(), id)
+	glog.Info("Succeed to reserve IP %s with ID %s", ip.String(), id)
 
 	// Update last reserved IP.
 	_, err = s.EtcdClient.KV.Put(s.Ctx, lastIPPrefix+rangeID, ip.String())
@@ -67,7 +67,7 @@ func (s *Store) Reserve(id string, ip net.IP, rangeID string) (bool, error) {
 		glog.Errorf("Failed to update last reserved IP %s", ip.String())
 		return false, err
 	}
-	glog.Info("Last reserved IP %s has been updated with ID %d", ip.String(), id)
+	glog.Info("Last reserved IP %s has been updated with ID %s", ip.String(), id)
 
 	return true, nil
 }
@@ -85,12 +85,12 @@ func (s *Store) LastReservedIP(rangeID string) (net.IP, error) {
 
 func (s *Store) Release(ip net.IP) error {
 	// Release an IP.
-	dr, err := s.EtcdClient.Delete(s.Ctx, ip.String())
+	dr, err := s.EtcdClient.Delete(s.Ctx, ip.String(), clientv3.WithPrevKV())
 	if err != nil {
 		glog.Errorf("Failed to release IP %s", ip.String())
 		return err
 	}
-	glog.Infof("Succeed to release IP %s with ID %d", ip.String(), dr.PrevKvs[0].Value)
+	glog.Infof("Succeed to release IP %s with ID %s", ip.String(), dr.PrevKvs[0].Value)
 
 	return nil
 }
@@ -107,7 +107,7 @@ func (s *Store) ReleaseByID(id string) error {
 	for _, kv := range gr.Kvs {
 		if string(kv.Value) == id {
 			// Release an IP by ID.
-			dr, err := s.EtcdClient.Delete(s.Ctx, string(kv.Key))
+			dr, err := s.EtcdClient.Delete(s.Ctx, string(kv.Key), clientv3.WithPrevKV())
 			if err != nil {
 				glog.Errorf("Failed to release IP %s by ID %s", string(kv.Key), dr.PrevKvs[0].Value)
 				return err
