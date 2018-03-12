@@ -24,7 +24,7 @@ type Store struct {
 func New(network string, endpoints []string) (*Store, error) {
 	// Set default endpoints if not specified.
 	if len(endpoints) == 0 {
-		endpoints = append(endpoints, "localhost:2379")
+		endpoints = append(endpoints, "10.9.96.4:2379")
 	}
 
 	// Initialize etcd client.
