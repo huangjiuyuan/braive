@@ -81,49 +81,44 @@
 			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
 		},
 		{
-			"ImportPath": "github.com/containernetworking/plugins/plugins/ipam/host-local/backend/allocator",
-			"Comment": "v0.7.0-10-g372bb5e",
-			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
-		},
-		{
 			"ImportPath": "github.com/containernetworking/plugins/plugins/ipam/host-local/backend/disk",
 			"Comment": "v0.7.0-10-g372bb5e",
 			"Rev": "372bb5e826201edd8921b82722dd5e73a0a536aa"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/auth/authpb",
-			"Comment": "v3.3.0-rc.0-469-g0a972daac",
-			"Rev": "0a972daac7bce68d7b779e0c0aac4082c677ac0a"
+			"Comment": "v3.3.0-rc.0-512-g00b84235d",
+			"Rev": "00b84235df27695c93e9956becec53f4d8134ea0"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/clientv3",
-			"Comment": "v3.3.0-rc.0-469-g0a972daac",
-			"Rev": "0a972daac7bce68d7b779e0c0aac4082c677ac0a"
+			"Comment": "v3.3.0-rc.0-512-g00b84235d",
+			"Rev": "00b84235df27695c93e9956becec53f4d8134ea0"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/etcdserver/api/v3rpc/rpctypes",
-			"Comment": "v3.3.0-rc.0-469-g0a972daac",
-			"Rev": "0a972daac7bce68d7b779e0c0aac4082c677ac0a"
+			"Comment": "v3.3.0-rc.0-512-g00b84235d",
+			"Rev": "00b84235df27695c93e9956becec53f4d8134ea0"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/etcdserver/etcdserverpb",
-			"Comment": "v3.3.0-rc.0-469-g0a972daac",
-			"Rev": "0a972daac7bce68d7b779e0c0aac4082c677ac0a"
+			"Comment": "v3.3.0-rc.0-512-g00b84235d",
+			"Rev": "00b84235df27695c93e9956becec53f4d8134ea0"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/mvcc/mvccpb",
-			"Comment": "v3.3.0-rc.0-469-g0a972daac",
-			"Rev": "0a972daac7bce68d7b779e0c0aac4082c677ac0a"
+			"Comment": "v3.3.0-rc.0-512-g00b84235d",
+			"Rev": "00b84235df27695c93e9956becec53f4d8134ea0"
 		},
 		{
-			"ImportPath": "github.com/coreos/etcd/pkg/logger",
-			"Comment": "v3.3.0-rc.0-469-g0a972daac",
-			"Rev": "0a972daac7bce68d7b779e0c0aac4082c677ac0a"
+			"ImportPath": "github.com/coreos/etcd/pkg/logutil",
+			"Comment": "v3.3.0-rc.0-512-g00b84235d",
+			"Rev": "00b84235df27695c93e9956becec53f4d8134ea0"
 		},
 		{
 			"ImportPath": "github.com/coreos/etcd/pkg/types",
-			"Comment": "v3.3.0-rc.0-469-g0a972daac",
-			"Rev": "0a972daac7bce68d7b779e0c0aac4082c677ac0a"
+			"Comment": "v3.3.0-rc.0-512-g00b84235d",
+			"Rev": "00b84235df27695c93e9956becec53f4d8134ea0"
 		},
 		{
 			"ImportPath": "github.com/coreos/go-iptables/iptables",

@@ -32,6 +32,7 @@ import (
 	"github.com/containernetworking/plugins/pkg/ipam"
 	"github.com/containernetworking/plugins/pkg/ns"
 	"github.com/containernetworking/plugins/pkg/utils"
+	"github.com/coreos/go-iptables/iptables"
 	"github.com/j-keck/arping"
 	"github.com/vishvananda/netlink"
 )
@@ -453,6 +454,35 @@ func cmdAdd(args *skel.CmdArgs) error {
 	brInterface.Mac = br.Attrs().HardwareAddr.String()
 
 	result.DNS = n.DNS
+
+	ipt, err := iptables.New()
+	if err != nil {
+		return fmt.Errorf("failed to create iptables rules for bridge %q: %v", n.BrName, err)
+	}
+
+	exists, err := ipt.Exists("filter", "FORWARD", "-i", "cni0", "-o", "ens7", "-j", "ACCEPT")
+	if err != nil {
+		return fmt.Errorf("failed to create iptables rules for bridge %q: %v", n.BrName, err)
+	}
+	if !exists {
+		ipt.Insert("filter", "FORWARD", 1, "-i", "cni0", "-o", "ens7", "-j", "ACCEPT")
+	}
+
+	exists, err = ipt.Exists("filter", "FORWARD", "-i", "cni0", "-o", "ens7", "-m", "state", "--state", "ESTABLISHED,RELATED", "-j", "ACCEPT")
+	if err != nil {
+		return fmt.Errorf("failed to create iptables rules for bridge %q: %v", n.BrName, err)
+	}
+	if !exists {
+		ipt.Insert("filter", "FORWARD", 1, "-i", "cni0", "-o", "ens7", "-m", "state", "--state", "ESTABLISHED,RELATED", "-j", "ACCEPT")
+	}
+
+	exists, err = ipt.Exists("nat", "POSTROUTING", "-o", "ens7", "-j", "MASQUERADE")
+	if err != nil {
+		return fmt.Errorf("failed to create iptables rules for bridge %q: %v", n.BrName, err)
+	}
+	if !exists {
+		ipt.Insert("nat", "POSTROUTING", 1, "-o", "ens7", "-j", "MASQUERADE")
+	}
 
 	return types.PrintResult(result, cniVersion)
 }

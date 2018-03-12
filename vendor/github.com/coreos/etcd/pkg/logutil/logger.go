@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package logger
+package logutil
 
 import "google.golang.org/grpc/grpclog"
 
@@ -28,15 +28,15 @@ type Logger interface {
 // assert that "defaultLogger" satisfy "Logger" interface
 var _ Logger = &defaultLogger{}
 
-// New wraps "grpclog.LoggerV2" that implements "Logger" interface.
+// NewLogger wraps "grpclog.LoggerV2" that implements "Logger" interface.
 //
 // For example:
 //
 //  var defaultLogger Logger
 //  g := grpclog.NewLoggerV2WithVerbosity(os.Stderr, os.Stderr, os.Stderr, 4)
-//  defaultLogger = New(g)
+//  defaultLogger = NewLogger(g)
 //
-func New(g grpclog.LoggerV2) Logger { return &defaultLogger{g: g} }
+func NewLogger(g grpclog.LoggerV2) Logger { return &defaultLogger{g: g} }
 
 type defaultLogger struct {
 	g grpclog.LoggerV2
